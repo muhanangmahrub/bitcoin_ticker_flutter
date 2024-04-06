@@ -1,3 +1,8 @@
+import 'network.dart';
+import 'api_key.dart';
+
+var url = 'https://rest.coinapi.io/v1/exchangerate';
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +33,12 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+  Future<dynamic> getCoinData(String base, String? quote) async {
+    NetworkHelper networkHelper =
+        NetworkHelper('$url/$base/$quote?apikey=$coinAPIKey');
+    var coinData = await networkHelper.getData();
+    print(coinData);
+    return coinData;
+  }
+}
